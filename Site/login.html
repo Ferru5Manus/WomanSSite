@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>8 Марта</title>
     <link rel="stylesheet" href="css/login.css" media="all">
+    <link rel="stylesheet" href="css/normalize.css" media="all">
     <link rel="icon" href="icon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="icon.ico" type="image/x-icon">
 </head>
@@ -24,11 +25,41 @@
             </p>
         </div>
         <div class="auth">
-            <p class="login_text">Имя<br><input class="login_input" placeholder="Введите СВОЁ имя"></p>
-            <p class="password_text">Код<br><input class="password_input" placeholder="Введите код"></p>
+            <p class="login_text">Имя<br><input class="login_input" id="name" placeholder="Введите СВОЁ имя"></p>
+            <p class="password_text">Код<br><input class="password_input" id="key" placeholder="Введите код"></p>
         </div>
         <div class="button_container">
-            <a href="" class="btn btn-light nowrap icons">Войти</a>
+            <a href="" class="btn btn-light nowrap icons" onclick="OnRegisterButtonClick()">Войти</a>
+            <script>
+                async function OnRegisterButtonClick() {
+                    var name = document.getElementById("name").value
+                    var key = document.getElementById("key").value
+                    if (name=="") {
+                       alert("Нам надо узнать как тебя зовут:3 ");
+                    }
+                    else if (key == "") {
+                        alert("А как же ключик?");
+                    }
+                    else {
+                        var response = await fetch("/login",
+                            {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ name : name, key : key })
+                            });
+                        IsRegistered = JSON.parse(await response.text())
+                        if (IsRegistered == true) {
+
+                            window.location = '/mainPage'
+                        }
+                        else {
+                            alert("Комбинация имени и ключика неверная")
+                        }
+                    }
+                }
+            </script>
         </div>
     </div>
 </body>
