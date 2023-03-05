@@ -1,0 +1,153 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/* ---------- FONTAWESOME ---------- */
+
+[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+}
+
+/* ---------- GENERAL ---------- */
+
+button,
+a {
+    cursor: pointer !important;
+    border: none !important;
+    text-decoration: none !important;
+    user-select: none;
+    outline: none !important;
+}
+
+body {
+  background: white;
+  font-family: 'Open Sans', Arial, sans-serif;
+  margin: 0;
+}
+
+.title {
+  font-size: 50px;
+  color: black;
+  border-bottom: 2px solid #FF66FF;
+}
+
+.content {
+  display: flex;
+  gap: 150px;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  flex-wrap: nowrap;
+}
+
+.login_text, 
+.password_text {
+  color: black;
+  font-size: 50px;
+}
+
+.login_input, 
+.password_input {
+  cursor: pointer !important;
+  text-decoration: none !important;
+  user-select: none;
+  outline: none !important;
+  font-size: 70px;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+  border-bottom: 2px solid #FF66FF;
+}
+
+.login_input::placeholder {
+  color: #212529;
+  opacity: 0.4;
+  font-size: 30px;
+}
+
+.login_input:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: #bdbdbd;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
+}
+
+.password_input::placeholder {
+  color: #212529;
+  opacity: 0.4;
+  font-size: 30px;
+}
+
+.password_input:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: #bdbdbd;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
+}
+
+.help {
+  color: gray;
+  text-align: left;
+  width: 90%;
+  font-size: 20px;
+}
+
+/* button */
+.nowrap {
+    white-space: nowrap !important;
+}
+
+.btn {
+    padding: 10px 100px 10px;
+    outline: none !important;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 70px;
+    line-height: 31px;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.btn::after {
+    content: "";
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: -1;
+    border-radius: 16px;
+    background: #FF66FF; !important;
+    transition: transform 0.45s ease-in-out !important;
+    transform: scale(0);
+}
+
+.btn-light {
+    background: lightgray; !important;
+    color: white; !important;
+}
+
+.btn:hover::after {
+    transform: scale(0.1);
+}
+.btn::before {
+    padding: 0 15px 0 0;
+    font-size: 18px;
+    margin: -2px 0 0 0;
+}
+.btn:focus::after {
+    transform: scale(0);
+}
+.btn:focus {
+    box-shadow: none !important;
+    background: #FFAAFF; !important;
+    color: white; !important;
+}
+.btn:hover {
+    box-shadow: none !important;
+    color: white; !important;
+}
