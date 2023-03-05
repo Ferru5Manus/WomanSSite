@@ -95,6 +95,25 @@ body {
   font-size: 20px;
 }
 
+.button_container {
+    position: fixed;
+    top: 93%;
+}
+
+@media screen and (max-height: 812px) {
+    .button_container {
+        position: fixed;
+        top: 96%;
+    }
+}
+
+@media screen and (max-height: 480px) {
+    .button_container {
+        position: fixed;
+        top: 90%;
+    }
+}
+
 /* button */
 .nowrap {
     white-space: nowrap !important;

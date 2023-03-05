@@ -1,0 +1,52 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/* ---------- FONTAWESOME ---------- */
+
+[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+}
+
+/* ---------- GENERAL ---------- */
+
+button,
+a {
+    cursor: pointer !important;
+    border: none !important;
+    text-decoration: none !important;
+    user-select: none;
+    outline: none !important;
+}
+
+body {
+  background: white;
+  font-family: 'Open Sans', Arial, sans-serif;
+  margin: 0;
+}
+
+.title {
+  font-size: 50px;
+  color: black;
+  border-bottom: 2px solid #FF66FF;
+}
+
+.content {
+  display: flex;
+  gap: 150px;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 5%;
+}
+
+.chat-container {
+  position: fixed;
+  top: 10%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffccf5;
+  border-radius: 50px;
+}

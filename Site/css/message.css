@@ -1,0 +1,14 @@
+body {
+	background: white;
+  	font-family: 'Open Sans', Arial, sans-serif;
+  	margin: 0;
+}
+
+.msg {
+	font-size: 25px;
+	padding: 10px;
+  	border-color: black;
+  	border-radius: 20px;
+  	background-color: gray;
+  	color: white;
+}
