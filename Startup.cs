@@ -38,10 +38,15 @@ namespace WomanSite
                 //endpoints.MapRazorPages();
                 endpoints.MapGet("/", async context =>
                 {
-                    string page = File.ReadAllText("Pages/`.html");
+                    string page = File.ReadAllText("Site/start.html");
                     await context.Response.WriteAsync(page);
                 });
-                
+                endpoints.MapGet("/loginPage", async context => 
+                {
+
+                    string page = File.ReadAllText("Site/login.html");
+                    await context.Response.WriteAsync(page);
+                });
             });
         }
     }
