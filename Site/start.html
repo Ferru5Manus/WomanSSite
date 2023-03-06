@@ -1,126 +1,12 @@
 <!DOCTYPE html>
 <html>
-<style>
-    @charset "utf-8";
-    /* CSS Document */
 
-
-    /* ---------- FONTAWESOME ---------- */
-
-    [class*="fontawesome-"]:before {
-        font-family: 'FontAwesome', sans-serif;
-    }
-
-    /* ---------- GENERAL ---------- */
-
-    button,
-    a {
-        cursor: pointer !important;
-        border: none !important;
-        text-decoration: none !important;
-        user-select: none;
-        outline: none !important;
-    }
-
-    body {
-        background-color: black;
-        color: white;
-        font-family: 'Open Sans', Arial, sans-serif;
-        font-size: 14px;
-    }
-
-    .button_container {
-        padding-top: 90%;
-    }
-
-    .site_title {
-        color: white;
-        font-size: 200px;
-    }
-
-    .site_subtitle {
-        color: gray;
-        font-size: 60px;
-    }
-
-    .login_title {
-        color: white;
-        font-size: 70px;
-    }
-
-    /* button */
-    .nowrap {
-        white-space: nowrap !important;
-    }
-
-    .btn {
-        padding: 40px 100px 40px;
-        outline: none !important;
-        border-radius: 16px;
-        font-weight: 600;
-        font-size: 70px;
-        line-height: 31px;
-        position: relative;
-        overflow: hidden;
-        z-index: 2;
-    }
-
-        .btn::after {
-            content: "";
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            position: absolute;
-            z-index: -1;
-            border-radius: 16px;
-            background: white;
-            !important;
-            transition: transform 0.45s ease-in-out !important;
-            transform: scale(0);
-        }
-
-    .btn-light {
-        background: white;
-        !important;
-        color: black;
-        !important;
-    }
-
-    .btn:hover::after {
-        transform: scale(0.1);
-    }
-
-    .btn::before {
-        padding: 0 15px 0 0;
-        font-size: 18px;
-        margin: -2px 0 0 0;
-    }
-
-    .btn:focus::after {
-        transform: scale(0);
-    }
-
-    .btn:focus {
-        box-shadow: none !important;
-        background: gray;
-        !important;
-        color: black;
-        !important;
-    }
-
-    .btn:hover {
-        box-shadow: none !important;
-        color: black;
-        !important;
-    }
-</style>
 <head>
 	<meta charset="UTF-8">
 	<title>8 Марта</title>
 	<link rel="stylesheet" href="css/start.css" media="all">
-	<link rel="icon" href="icon.ico" type="image/x-icon">
-	<link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+	<link rel="icon" href="/icon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="/icon.ico" type="image/x-icon">
 </head>
 <body>
     <div class="content">
@@ -133,9 +19,14 @@
             </div>
         </div>
         <div class="button_container">
-            <a class="btn btn-light nowrap icons">Войти с использованием мозга</a>
+            <a class="btn btn-light nowrap icons" onclick="redirect()">Войти с использованием мозга</a>
         </div>
     </div>
+    <script>
+        function redirect() {
+            window.location = "/loginPage"
+        }
+    </script>    
 </body>
 <footer>
 </footer>
