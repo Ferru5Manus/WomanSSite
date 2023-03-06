@@ -49,14 +49,9 @@
                             },
                             body: JSON.stringify({ name : name, key : key })
                         });
-                        IsRegistered = JSON.parse(await response)
-                        if (IsRegistered == true) {
 
-                           window.location = '/chatPage'
-                        }
-                        else {
-                            alert("Комбинация имени и ключика неверная")
-                        }
+                        window.location = '/chatPage'
+                     
                     }
                 }
             </script>
