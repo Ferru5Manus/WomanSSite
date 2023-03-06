@@ -56,7 +56,7 @@ namespace WomanSite
                 {
                     string page = File.ReadAllText("Site/chat.html");
                     await context.Response.WriteAsync(page);
-                });
+                }).RequireAuthorization();
                 //Adding css
                 endpoints.MapGet("css/start.css",async context=>
                 {
@@ -102,7 +102,12 @@ namespace WomanSite
                         };
                         ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
                         await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
-                        context.Response.Redirect("/chatPage");
+                        
+                        await context.Response.WriteAsJsonAsync(true);
+                    }
+                    else
+                    {
+                        await context.Response.WriteAsJsonAsync(false);
                     }
                 });
 

@@ -49,14 +49,14 @@
                             },
                             body: JSON.stringify({ name : name, key : key })
                         });
-                       // IsRegistered = JSON.parse(await response.text())
-                        //if (IsRegistered == true) {
+                        IsRegistered = JSON.parse(await response.text())
+                        if (IsRegistered == true) {
 
-                          //  window.location = '/mainPage'
-                        //}
-                        //else {
-                        //    alert("Комбинация имени и ключика неверная")
-                        //}
+                           window.location = '/mainPage'
+                        }
+                        else {
+                            alert("Комбинация имени и ключика неверная")
+                        }
                     }
                 }
             </script>
