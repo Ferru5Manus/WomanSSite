@@ -106,10 +106,11 @@ namespace WomanSite
                         };
                         ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
                         await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
-                        context.Response.Redirect("/chatPage");
+                        
+
                     }
 
-                    await context.Response.WriteAsync(credentials.name);
+
                 });
                 endpoints.MapPost("/check", async context =>
                 {
