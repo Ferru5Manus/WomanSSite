@@ -109,9 +109,15 @@ namespace WomanSite
 
                         // добавляем куки нашему пользователю
                         await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+                        try
+                        {
 
-                        // перенаправляем на нужную сраницу
-                        context.Response.Redirect("/chatPage");
+                            // перенаправляем на нужную сраницу
+                            context.Response.Redirect("/chatPage");
+                        }
+                        catch(Exception ex){
+                            Console.WriteLine(ex);
+                        }
                     }
 
                     await context.Response.WriteAsync(credentials.name);
