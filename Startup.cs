@@ -91,11 +91,11 @@ namespace WomanSite
                     await context.Response.WriteAsync(page);
                 });
                 //Adding logic
-                endpoints.MapPost("/login", async context => 
+                endpoints.MapPut("/login", async context => 
                 {
                     
                     var credentials = await context.Request.ReadFromJsonAsync<User>();
-                    AuthController? lm = app.ApplicationServices.GetService<AuthController>();
+                    AuthController lm = app.ApplicationServices.GetService<AuthController>();
                     Console.WriteLine(credentials.name + " " + credentials.key);
                     Console.WriteLine(lm);
                     if (lm.Login(credentials) == true)
@@ -107,11 +107,17 @@ namespace WomanSite
                         ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
                         await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
                         
-
                     }
 
-
+                   
                 });
+                endpoints.MapPost("/IsloggedIn", async context =>
+                {
+                    var credentials = await context.Request.ReadFromJsonAsync<User>();
+                    AuthController lm = app.ApplicationServices.GetService<AuthController>();
+                    await context.Response.WriteAsJsonAsync(lm.Login(credentials));
+                });
+                
                 endpoints.MapPost("/check", async context =>
                 {
                     await context.Response.WriteAsJsonAsync (context.User.Identity.Name);
