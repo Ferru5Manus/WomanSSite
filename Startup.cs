@@ -96,6 +96,7 @@ namespace WomanSite
                     AuthController? lm = app.ApplicationServices.GetService<AuthController>();
                     if (lm.Login(credentials) == true)
                     {
+                        Console.WriteLine("response true");
                         List<Claim> claims = new List<Claim>()
                         {
                             new Claim(ClaimsIdentity.DefaultNameClaimType, credentials.name)
@@ -107,6 +108,7 @@ namespace WomanSite
                     }
                     else
                     {
+                        Console.WriteLine("response False");
                         await context.Response.WriteAsJsonAsync(false);
                     }
                 });

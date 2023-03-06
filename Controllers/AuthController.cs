@@ -15,10 +15,13 @@ namespace WomanSite.Controllers
                 {
                     if (item.name == user.name)
                     {
+                        Console.WriteLine("Auth DONE!");
                         return true;
                     }
+                    Console.WriteLine(item);
                 }
             }
+            Console.WriteLine("Auth False");
             return false;
         }
     }
