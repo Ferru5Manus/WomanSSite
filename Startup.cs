@@ -18,6 +18,7 @@ namespace WomanSite
                 options.MemoryBufferThreshold = int.MaxValue;
             });
             services.AddSingleton<AuthController>();
+
             services
                 .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => options.LoginPath = new PathString("/loginPage"));
@@ -103,21 +104,16 @@ namespace WomanSite
                         {
                             new Claim(ClaimsIdentity.DefaultNameClaimType, credentials.name)
                         };
-                        // ñîçäàåì îáúåêò ClaimsIdentity
                         ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
-
-                        // äîáàâëÿåì êóêè íàøåìó ïîëüçîâàòåëþ
                         await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
-
-                        // ïåðåíàïðàâëÿåì íà íóæíóþ ñðàíèöó
                         context.Response.Redirect("/chatPage");
                     }
 
                     await context.Response.WriteAsync(credentials.name);
                 });
-                endpoints.MapPost("/login", async context =>
+                endpoints.MapPost("/check", async context =>
                 {
-                    await context.Response.WriteAsJsonAsync(context.User.Identity.Name);
+                    await context.Response.WriteAsJsonAsync (context.User.Identity.Name);
                 });
              });
         }
