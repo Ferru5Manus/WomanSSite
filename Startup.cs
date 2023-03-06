@@ -98,18 +98,21 @@ namespace WomanSite
                     Console.WriteLine(lm);
                     if (lm.Login(credentials) == true)
                     {
-                        Console.WriteLine("response true");
                         List<Claim> claims = new List<Claim>()
                         {
                             new Claim(ClaimsIdentity.DefaultNameClaimType, credentials.name)
                         };
+                        // ñîçäàåì îáúåêò ClaimsIdentity
                         ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+
+                        // äîáàâëÿåì êóêè íàøåìó ïîëüçîâàòåëþ
                         await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+
+                        // ïåðåíàïðàâëÿåì íà íóæíóþ ñðàíèöó
+                        context.Response.Redirect("/chatPage");
                     }
-                    else
-                    {
-                        Console.WriteLine("response False");
-                    }
+
+                    await context.Response.WriteAsync(credentials.name);
                 });
 
             });
