@@ -41,16 +41,20 @@
                         alert("А как же ключик?");
                     }
                     else {
-                        await fetch("/login", {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
+                        (async () => {
+                            const rawResponse = await fetch("/login", {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
 
-                            },
-                            body: JSON.stringify({ name: name, key: key })
-                        });
-                        
+                                },
+                                body: JSON.stringify({ name: name, key: key })
+                            });
+                            const content = await rawResponse.json();
 
+                            console.log(content);
+                        })();
+                       
                     }
                     window.location = '/chatPage'
 
