@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
 using WomanSite.Models;
 
 namespace WomanSite.Database
@@ -17,7 +19,7 @@ namespace WomanSite.Database
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(System.Environment.GetEnvironmentVariable("DB_URL"));
+            optionsBuilder.UseNpgsql("Server = db; Database = postgres; Uid = postgres; Pwd = 78aaJJxHg;");
         }
     }
 }

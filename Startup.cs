@@ -94,6 +94,8 @@ namespace WomanSite
                     
                     var credentials = await context.Request.ReadFromJsonAsync<User>();
                     AuthController? lm = app.ApplicationServices.GetService<AuthController>();
+                    Console.WriteLine(credentials.name + " " + credentials.key);
+                    Console.WriteLine(lm);
                     if (lm.Login(credentials) == true)
                     {
                         Console.WriteLine("response true");
@@ -103,7 +105,6 @@ namespace WomanSite
                         };
                         ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
                         await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
-                        
                     }
                     else
                     {

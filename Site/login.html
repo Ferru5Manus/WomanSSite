@@ -41,17 +41,17 @@
                         alert("А как же ключик?");
                     }
                     else {
-                        await fetch("/login",
-                        {
+                        await fetch("/login", {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({ name : name, key : key })
-                        });
 
+                            },
+                            body: JSON.stringify({ name: name, key: key })
+                        });
                         window.location = '/chatPage'
-                     
+                       
+
                     }
                 }
             </script>
