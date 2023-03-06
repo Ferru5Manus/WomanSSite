@@ -115,8 +115,11 @@ namespace WomanSite
 
                     await context.Response.WriteAsync(credentials.name);
                 });
-
-            });
+                endpoints.MapPost("/login", async context =>
+                {
+                    await context.Response.WriteAsJsonAsync(context.User.Identity.Name);
+                });
+             });
         }
     }
     

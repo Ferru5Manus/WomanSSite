@@ -14,5 +14,17 @@
         <div class="chat-container">
             
         </div>
+        <script>
+            async function check() {
+                var resp = await fetch("/check", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+
+                    }
+                });
+                alert(JSON.parse(await response.text()))
+            }
+        </script>
     </div>
 </body>
