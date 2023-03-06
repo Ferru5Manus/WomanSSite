@@ -111,7 +111,7 @@ namespace WomanSite
                         await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
                        
                             // перенаправляем на нужную сраницу
-                        await context.Response.Redirect("/chatPage");
+                        context.Response.Redirect("/chatPage");
                         
                     }
 
