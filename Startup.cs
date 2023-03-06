@@ -93,25 +93,19 @@ namespace WomanSite
                 {
                     
                     var credentials = await context.Request.ReadFromJsonAsync<User>();
-                    // ñ çàäàííûì ëîãèíîì è ïàðîëåì ìû ïîéäåì â áàçó
-                    // åñëè â áàçå åñòü ïîëüçîâàòåëü, òî âñ¸ îê, åñëè íåò, òî íè÷åãî íå äåëàåì
                     AuthController? lm = app.ApplicationServices.GetService<AuthController>();
                     if (lm.Login(credentials) == true)
                     {
                         List<Claim> claims = new List<Claim>()
                         {
-                            new Claim(ClaimsIdentity.DefaultNameClaimType, credentials.loginString)
+                            new Claim(ClaimsIdentity.DefaultNameClaimType, credentials.name)
                         };
-                        // ñîçäàåì îáúåêò ClaimsIdentity
                         ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
-
-                        // äîáàâëÿåì êóêè íàøåìó ïîëüçîâàòåëþ
                         await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
-
-                        // ïåðåíàïðàâëÿåì íà íóæíóþ ñðàíèöó
                         context.Response.Redirect("/chatPage");
                     }
                 });
+
             });
         }
     }
