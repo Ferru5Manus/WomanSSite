@@ -48,7 +48,7 @@ namespace WomanSite
                     string page = File.ReadAllText("Site/start.html");
                     await context.Response.WriteAsync(page);
                 });
-                endpoints.MapGet("/loginPage", async context => 
+                endpoints.MapGet("/Auth", async context => 
                 {
                     string page = File.ReadAllText("Site/login.html");
                     await context.Response.WriteAsync(page);
@@ -109,15 +109,10 @@ namespace WomanSite
 
                         // добавляем куки нашему пользователю
                         await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
-                        try
-                        {
-
+                       
                             // перенаправляем на нужную сраницу
-                            context.Response.Redirect("/chatPage");
-                        }
-                        catch(Exception ex){
-                            Console.WriteLine(ex);
-                        }
+                        context.Response.Redirect("/chatPage");
+                        
                     }
 
                     await context.Response.WriteAsync(credentials.name);
