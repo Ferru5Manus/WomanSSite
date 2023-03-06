@@ -58,7 +58,7 @@ namespace WomanSite
                     string page = File.ReadAllText("Site/chat.html");
                     await context.Response.WriteAsync(page);
                     
-                });
+                }).RequireAuthorization();
                 //Adding css
                 endpoints.MapGet("css/start.css",async context=>
                 {
@@ -111,7 +111,7 @@ namespace WomanSite
                         await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
                        
                             // перенаправляем на нужную сраницу
-                        context.Response.Redirect("/chatPage");
+                        await context.Response.Redirect("/chatPage");
                         
                     }
 
