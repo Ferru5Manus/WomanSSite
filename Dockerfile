@@ -18,5 +18,6 @@ RUN dotnet publish "WomanSite.csproj" -c Release -o /app/publish /p:UseAppHost=f
 
 FROM base AS final
 WORKDIR /app
+COPY ["Site","Site"]
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "WomanSite.dll"]
