@@ -104,12 +104,10 @@ namespace WomanSite
                         ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
                         await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
                         
-                        await context.Response.WriteAsJsonAsync(true);
                     }
                     else
                     {
                         Console.WriteLine("response False");
-                        await context.Response.WriteAsJsonAsync(false);
                     }
                 });
 
