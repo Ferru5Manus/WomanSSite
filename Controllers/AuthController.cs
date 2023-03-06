@@ -18,7 +18,6 @@ namespace WomanSite.Controllers
                         Console.WriteLine("Auth DONE!");
                         return true;
                     }
-                    Console.WriteLine(item);
                 }
             }
             Console.WriteLine("Auth False");
