@@ -32,7 +32,6 @@ namespace WomanSite
             {
                 app.UseDeveloperExceptionPage();
             }
-            List<Claim> claims;
 
             app.UseAuthentication();
 
