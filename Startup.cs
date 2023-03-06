@@ -20,7 +20,7 @@ namespace WomanSite
             services.AddSingleton<AuthController>();
             services
                 .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options => options.LoginPath = new PathString("/auth"));
+                .AddCookie(options => options.LoginPath = new PathString("/loginPage"));
             services.AddAuthorization();
         }
 

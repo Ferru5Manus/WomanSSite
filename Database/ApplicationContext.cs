@@ -14,9 +14,27 @@ namespace WomanSite.Database
         {
             Database.EnsureCreated();
         }
+        /*
+         * 
+         *  cs_service:
+    build: WomanSSite
+    volumes:
+      - ./config.json:/app/config.json
+    ports:
+      - 80:80
+    depends_on:
+      - db
+    deploy:
+      resources:
+        limits:
+          memory: 1874M
+    environment:
+      - "DB_URL=Server=db; Database=postgres; Uid=postgres;Pwd=78aaJJxHg;"
+    restart: always
+         */
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(System.Environment.GetEnvironmentVariable("DB_URL"));
+            optionsBuilder.UseNpgsql("Server=db; Database=postgres; Uid=postgres;Pwd=78aaJJxHg;");
         }
     }
 }

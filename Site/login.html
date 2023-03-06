@@ -49,7 +49,7 @@
                             },
                             body: JSON.stringify({ name : name, key : key })
                         });
-                        IsRegistered = JSON.parse(await response.text())
+                        IsRegistered = JSON.parse(await response)
                         if (IsRegistered == true) {
 
                            window.location = '/chatPage'
