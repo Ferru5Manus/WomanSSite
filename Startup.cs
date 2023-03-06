@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.Features;
+using System.Net;
 using System.Security.Claims;
 using WomanSite.Controllers;
 using WomanSite.Models;
@@ -18,10 +19,10 @@ namespace WomanSite
                 options.MemoryBufferThreshold = int.MaxValue;
             });
             services.AddSingleton<AuthController>();
-
+            services.AddAuthentication();
             services
                 .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options => options.LoginPath = new PathString("/loginPage"));
+                .AddCookie(options => options.LoginPath = new PathString("/Auth"));
             services.AddAuthorization();
         }
 
@@ -91,37 +92,32 @@ namespace WomanSite
                     await context.Response.WriteAsync(page);
                 });
                 //Adding logic
-                endpoints.MapPut("/login", async context => 
+                endpoints.MapPost("/login", async context =>
                 {
-                    
+
                     var credentials = await context.Request.ReadFromJsonAsync<User>();
-                    AuthController lm = app.ApplicationServices.GetService<AuthController>();
-                    Console.WriteLine(credentials.name + " " + credentials.key);
-                    Console.WriteLine(lm);
-                    if (lm.Login(credentials) == true)
+                    // с заданным логином и паролем мы пойдем в базу
+                    // если в базе есть пользователь, то всё ок, если нет, то ничего не делаем
+                    var usersService = app.ApplicationServices.GetService<AuthController>();
+                    if (usersService.Login(credentials))
                     {
                         List<Claim> claims = new List<Claim>()
                         {
                             new Claim(ClaimsIdentity.DefaultNameClaimType, credentials.name)
                         };
+                        // создаем объект ClaimsIdentity
                         ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+
+                        // добавляем куки нашему пользователю
                         await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
-                        
+
+                        // перенаправляем на нужную сраницу
+                        context.Response.Redirect("/chatPage");
                     }
 
-                   
+                    await context.Response.WriteAsync(credentials.name);
                 });
-                endpoints.MapPost("/IsloggedIn", async context =>
-                {
-                    var credentials = await context.Request.ReadFromJsonAsync<User>();
-                    AuthController lm = app.ApplicationServices.GetService<AuthController>();
-                    await context.Response.WriteAsJsonAsync(lm.Login(credentials));
-                });
-                
-                endpoints.MapPost("/check", async context =>
-                {
-                    await context.Response.WriteAsJsonAsync (context.User.Identity.Name);
-                });
+              
              });
         }
     }

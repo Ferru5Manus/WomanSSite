@@ -31,53 +31,28 @@
         <div class="button_container">
             <a href="" class="btn btn-light nowrap icons" onclick="OnRegisterButtonClick()">Войти</a>
             <script>
-                async function OnRegisterButtonClick()
-                {
+                async function OnRegisterButtonClick() {
                     var name = document.getElementById("name").value
                     var key = document.getElementById("key").value
-                    if (name == "") {
-                        alert("Нам надо узнать как тебя зовут:3 ");
+                    if (name=="") {
+                       alert("Нам надо узнать как тебя зовут:3 ");
                     }
-
-
                     else if (key == "") {
                         alert("А как же ключик?");
                     }
-
-
-
                     else {
                         await fetch("/login", {
-                            method: 'PUT',
-                            headers: {
-                                'Content-Type': 'application/json'
-
-                            },
-                            body: JSON.stringify({ name: name, key: key })
-                        });
-                        var resp = await fetch("/IsloggedIn", {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
-
                             },
-                            body: JSON.stringify({ name: name, key: key })
+                            body: JSON.stringify({ name : name, key : key })
                         });
-                        IsRegistered = JSON.parse(await resp.text())
-                        if (IsRegistered == false) {
-                            alert("Error incorrect login or password.")
-                        }
-                        else {
+                        
 
-                            window.location = '/chatPage'
-                        }
-                        }
-
+                    }
 
                 }
-                  
-
-                
             </script>
         </div>
     </div>
