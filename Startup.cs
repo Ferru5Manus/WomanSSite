@@ -56,7 +56,8 @@ namespace WomanSite
                 {
                     string page = File.ReadAllText("Site/chat.html");
                     await context.Response.WriteAsync(page);
-                }).RequireAuthorization();
+                    
+                });
                 //Adding css
                 endpoints.MapGet("css/start.css",async context=>
                 {
