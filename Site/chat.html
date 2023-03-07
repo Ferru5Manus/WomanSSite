@@ -30,7 +30,7 @@
                 messageContent = JSON.parse(await response.text())
                 var x = document.getElementById("chat-container");
                 var newMessage = document.createElement("div");
-                newMessage.innerHTML = '<div>< p class="msg" > ' + messageContent +'</p ></div > '
+                newMessage.innerHTML = '<p class="msg"> ' + messageContent +'</p>'
                 x.appendChild(newMessage)
             }
         </script>
