@@ -41,14 +41,20 @@
                         alert("А как же ключик?");
                     }
                     else {
-                        await fetch("/login", {
+                        var response = await fetch("/login", {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
                             },
                             body: JSON.stringify({ name : name, key : key })
                         });
-                        
+                        IsRegistered = JSON.parse(await response.text())
+                        if (IsRegistered == false) {
+                            alert("Error incorrect login or password.")
+                        }
+                        else {
+                            window.location="/chatPage"
+                        }
 
                     }
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using Azure;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.Features;
@@ -100,8 +101,9 @@ namespace WomanSite
                         // создаем объект ClaimsIdentity
                         ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
                         // установка аутентификационных куки
+                        
                         await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-                        context.Response.Redirect("/chatPage", false);
+                        await context.Response.WriteAsJsonAsync(true);
                     }
 
                 });
