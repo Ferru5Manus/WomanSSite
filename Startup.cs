@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.Features;
+using System;
 using System.Net;
 using System.Security.Claims;
 using WomanSite.Controllers;
@@ -19,10 +20,8 @@ namespace WomanSite
                 options.MemoryBufferThreshold = int.MaxValue;
             });
             services.AddSingleton<AuthController>();
-            services.AddAuthentication();
-            services
-                .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options => options.LoginPath = new PathString("/Auth"));
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options => options.LoginPath = "/loginPage");
             services.AddAuthorization();
         }
 
@@ -32,12 +31,10 @@ namespace WomanSite
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseAuthentication();
-
             app.UseRouting();
-
-            app.UseAuthorization();
+            app.UseAuthentication();  
+            app.UseAuthorization();     
+            
 
             app.UseEndpoints(endpoints =>
             {
@@ -48,9 +45,9 @@ namespace WomanSite
                     string page = File.ReadAllText("Site/start.html");
                     await context.Response.WriteAsync(page);
                 });
-                endpoints.MapGet("/Auth", async context => 
+                endpoints.MapGet("/loginPage", async context => 
                 {
-                    string page = File.ReadAllText("Site/login.html");
+                    string page = File.ReadAllText("Site/login.cshtml");
                     await context.Response.WriteAsync(page);
                 });
                 endpoints.MapGet("/chatPage", async context =>
@@ -90,35 +87,25 @@ namespace WomanSite
                     string page = File.ReadAllText("Site/css/message.css");
                     await context.Response.WriteAsync(page);
                 });
-                //Adding logic
-                endpoints.MapPost("/login", async context =>
+                endpoints.MapPost("/login", async context => 
                 {
-
-                    var credentials = await context.Request.ReadFromJsonAsync<User>();
-                    // с заданным логином и паролем мы пойдем в базу
-                    // если в базе есть пользователь, то всё ок, если нет, то ничего не делаем
-                    var usersService = app.ApplicationServices.GetService<AuthController>();
-                    if (usersService.Login(credentials))
+                    var user = await context.Request.ReadFromJsonAsync<User>();
+                    var am = app.ApplicationServices.GetService<AuthController>();
+                    var name = user.name;
+                    var key = user.key;
+                    if (am.Login(user)==true)
                     {
-                        List<Claim> claims = new List<Claim>()
-                        {
-                            new Claim(ClaimsIdentity.DefaultNameClaimType, credentials.name)
-                        };
+
+                        var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.name) };
                         // создаем объект ClaimsIdentity
-                        ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
-
-                        // добавляем куки нашему пользователю
-                        await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
-                       
-                            // перенаправляем на нужную сраницу
-                        context.Response.Redirect("/chatPage");
-                        
+                        ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
+                        // установка аутентификационных куки
+                        await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+                        return Results.Redirect(returnUrl??"/chatPage");
                     }
-
-                    await context.Response.WriteAsync(credentials.name);
                 });
-              
-             });
+
+            });
         }
     }
     
