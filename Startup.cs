@@ -101,8 +101,9 @@ namespace WomanSite
                         ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
                         // установка аутентификационных куки
                         await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-                        Results.Redirect("/chatPage",false);
+                        context.Response.Redirect("/chatPage", false);
                     }
+
                 });
 
             });
