@@ -47,7 +47,7 @@ namespace WomanSite
                 });
                 endpoints.MapGet("/loginPage", async context => 
                 {
-                    string page = File.ReadAllText("Site/login.cshtml");
+                    string page = File.ReadAllText("Site/login.html");
                     await context.Response.WriteAsync(page);
                 });
                 endpoints.MapGet("/chatPage", async context =>
