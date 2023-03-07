@@ -12,10 +12,8 @@
 <body onload="StartMessaging()">>
     <div class="content">
         <p class="title">ЭФБОт</p>
-        <div class="chat-container" 
-            <div>
-                <p class="msg">Сообщение</p>
-            </div>
+        <div class="chat-container"> 
+            
         </div>
         <div class="send">
             <p><input class="input" id="name"><a class="btn btn-light nowrap icons">Send</a></p>
@@ -33,6 +31,7 @@
                 var x = document.getElementById("chat-container");
                 var newMessage = document.createElement("div");
                 newMessage.innerHTML = '<div>< p class="msg" > ' + messageContent +'</p ></div > '
+                x.appendChild(newMessages)
             }
         </script>
     </div>
