@@ -107,7 +107,9 @@ namespace WomanSite
                     }
 
                 });
-
+                endpoints.MapPost("/login", async context => {
+                    await context.Response.WriteAsJsonAsync(context.User.Identity.Name);
+                });
             });
         }
     }
