@@ -107,8 +107,8 @@ namespace WomanSite
                     }
 
                 });
-                endpoints.MapPost("/check", async context => {
-                    await context.Response.WriteAsJsonAsync(context.User.Identity.Name);
+                endpoints.MapGet("/getFirstMessage", async context => {
+                    await context.Response.WriteAsJsonAsync("ЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫ "+context.User.Identity.Name);
                 });
             });
         }
