@@ -8,31 +8,33 @@
     <link rel="stylesheet" href="css/message.css" media="all">
     <link rel="icon" href="icon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="icon.ico" type="image/x-icon">
-    <body>
-        <div class="content">
-            <p class="title">ЭФБОт</p>
-            <div class="chat-container" onload="StartMessaging()">
-                <div>
-                    <p class="msg">Сообщение</p>
-                </div>
+</head>
+<body onload="StartMessaging()">>
+    <div class="content">
+        <p class="title">ЭФБОт</p>
+        <div class="chat-container" 
+            <div>
+                <p class="msg">Сообщение</p>
             </div>
-            <div class="send">
-                <p><input class="input" id="name"><a class="btn btn-light nowrap icons">Send</a></p>
-            </div>
-            <script>
-                async function StartMessaging()
-                {
-                    var response = await fetch("/getFirstMessage", {
-                        method: 'Get',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    });
-                    messageContent = JSON.parse(await response.text())
-                    var x = document.getElementById("chat-container");
-                    var newMessage = document.createElement("div");
-                    newMessage.innerHTML = '<div>< p class="msg" > ' + messageContent +'</p ></div > '
-                }
-            </script>
         </div>
-    </body>
+        <div class="send">
+            <p><input class="input" id="name"><a class="btn btn-light nowrap icons">Send</a></p>
+        </div>
+        <script>
+            async function StartMessaging()
+            {
+                var response = await fetch("/getFirstMessage", {
+                    method: 'Get',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                messageContent = JSON.parse(await response.text())
+                var x = document.getElementById("chat-container");
+                var newMessage = document.createElement("div");
+                newMessage.innerHTML = '<div>< p class="msg" > ' + messageContent +'</p ></div > '
+            }
+        </script>
+    </div>
+</body>
+</html>
