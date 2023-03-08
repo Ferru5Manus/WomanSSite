@@ -17,7 +17,9 @@ namespace WomanSite.Controllers
                 {
                     if (item.id==id)
                     {
-                        s= item.text + item.guess;
+
+                        Console.WriteLine("sucsess");
+                        s = item.text + item.guess;
                         currName = item.personName;
                     }
                 }
