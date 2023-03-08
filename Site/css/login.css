@@ -105,8 +105,8 @@ body {
 @media screen and (max-height: 812px) {
     .button_container {
         position: fixed;
-        top: 96%;
-        
+        top: 86%;
+
         display: flex;
         flex-flow: column;
     }
@@ -115,7 +115,7 @@ body {
 @media screen and (max-height: 480px) {
     .button_container {
         position: fixed;
-        top: 90%;
+        top: 80%;
         display: flex;
         flex-flow: column;
     }
