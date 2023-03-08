@@ -109,7 +109,7 @@ namespace WomanSite
                         // äîáàâëÿåì êóêè íàøåìó ïîëüçîâàòåëþ
                         await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
 
-                        await context.Response.WriteAsJsonAsync(false);
+                        await context.Response.WriteAsJsonAsync(true);
                     }
                     else
                     {
