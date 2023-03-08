@@ -51,6 +51,7 @@ body {
   border-radius: 50px;
   display: flex;
   flex-direction: column;
+  overflow: auto;
 }
 
 .send {
