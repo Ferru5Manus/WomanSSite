@@ -33,7 +33,7 @@
                 newMessage.innerHTML = '<p class="msg_to">' + "Привет, я суперпупермега бот, созданный твоими одногруппниками для поздравления с 8 марта. Ответь пожалуйста на мои вопросы, чтобы я мог выбрать для тебя прекрасный подарок. Есть одно правило, отвечай на вопрос точно." +'</p>'
                 x.appendChild(newMessage)
                 var superButton = document.getElementById("superButton")
-                if (messageContent = "Арина") {
+                if (messageContent == "Арина") {
                     superButton.setAttribute('onclick', 'Dialugue(2,\'' + messageContent + '\')');
                     var resp = await fetch("/getMessage", {
                         method: 'Post',
@@ -47,7 +47,7 @@
                     msg.innerHTML = '<p class="msg_to">' + currMessage1 + '</p>'
                     x.appendChild(msg)
                 }
-                else if (messageContent = "Даша") {
+                else if (messageContent == "Даша") {
                     superButton.setAttribute('onclick', 'Dialugue(14,\'' + messageContent + '\')');
                     var resp = await fetch("/getMessage", {
                         method: 'Post',
@@ -61,7 +61,7 @@
                     msg.innerHTML = '<p class="msg_to">' + currMessage1 + '</p>'
                     x.appendChild(msg)
                 }
-                else if (messageContent = "Катя") {
+                else if (messageContent == "Катя") {
                     superButton.setAttribute('onclick', 'Dialugue(26,\'' + messageContent + '\')');
                     var resp = await fetch("/getMessage", {
                         method: 'Post',
