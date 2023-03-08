@@ -24,10 +24,12 @@ namespace WomanSite.Controllers
             }
             if(womanName==currName)
             {
+                Console.WriteLine("sucsess");
                 return s;
             }
             else
             {
+                Console.WriteLine("end");
                 return "end";
             }
         }

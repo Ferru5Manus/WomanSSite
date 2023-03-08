@@ -114,6 +114,7 @@ namespace WomanSite
                 endpoints.MapPost("/getMessage", async context => 
                 {
                     var question = await context.Request.ReadFromJsonAsync<Question>();
+                    Console.WriteLine(question.id +" "+ question.personName);
                     var dc = app.ApplicationServices.GetService<DialogueController>();
                     await context.Response.WriteAsJsonAsync(dc.GetMessage(question.id,question.personName));
                 });
