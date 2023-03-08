@@ -20,7 +20,7 @@ namespace WomanSite.Controllers
                     {
 
                         Console.WriteLine("sucsess");
-                        s = item.text + item.guess;
+                        s = item.text +'\n'+ item.guess;
                         currName = item.personName;
                     }
                 }
