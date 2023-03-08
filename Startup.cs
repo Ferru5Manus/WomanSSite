@@ -126,8 +126,10 @@ namespace WomanSite
                     var ret = dc.GetMessage(answer.questionId+1, context.User.Identity.Name);
                     if (ret != "end")
                     {
+                        Console.WriteLine("ans adding");
                         var ans1 = new Answer() { questionId = answer.questionId, userLogin = context.User.Identity.Name, answer = answer.answer };
-                        dc.addAnswer(ans1);
+                        var x = dc.addAnswer(ans1);
+                        Console.WriteLine(x);
                     }
                     await context.Response.WriteAsJsonAsync(ret);
                 });
