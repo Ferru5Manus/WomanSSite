@@ -30,6 +30,8 @@
         </div>
         <div class="button_container">
             <a  class="btn btn-light nowrap icons" onclick="OnRegisterButtonClick()">Войти</a>
+            <br>
+            <a  class="btn btn-light nowrap icons" onclick="OnPamagitiClick()">Я вумен памагити</a>
             <script>
                 async function OnRegisterButtonClick() {
                     var name = document.getElementById("name").value
@@ -50,7 +52,7 @@
                         });
                         IsRegistered = JSON.parse(await response.text())
                         if (IsRegistered == false) {
-                            alert("Error incorrect login or password.")
+                            alert("Вы не правильно написали имя или код")
                         }
                         else {
                             window.location="/chatPage"
@@ -58,6 +60,12 @@
 
                     }
 
+                }
+            </script>
+            <script type="text/javascript">
+                async function OnPamagitiClick()
+                {
+                     window.location="https://vk.com/the_emperorofroses"
                 }
             </script>
         </div>

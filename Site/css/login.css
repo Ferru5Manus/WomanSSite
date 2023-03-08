@@ -97,13 +97,18 @@ body {
 
 .button_container {
     position: fixed;
-    top: 93%;
+    top: 80%;
+    display: flex;
+    flex-flow: column;
 }
 
 @media screen and (max-height: 812px) {
     .button_container {
         position: fixed;
         top: 96%;
+        
+        display: flex;
+        flex-flow: column;
     }
 }
 
@@ -111,6 +116,8 @@ body {
     .button_container {
         position: fixed;
         top: 90%;
+        display: flex;
+        flex-flow: column;
     }
 }
 
@@ -120,7 +127,7 @@ body {
 }
 
 .btn {
-    padding: 10px 100px 10px;
+    padding: 20px 100px 20px;
     outline: none !important;
     border-radius: 25px;
     font-weight: 600;

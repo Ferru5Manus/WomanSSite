@@ -82,7 +82,11 @@
                 var x = document.getElementById("chat-container");
                 var messageInput = document.getElementById("name");
                 var message = messageInput.value;
-                var newMessage1 = document.createElement("div");
+                if(message=="" || message==null){
+                    alert="Очень смешно!"
+                }
+                else{
+                    var newMessage1 = document.createElement("div");
                 newMessage1.innerHTML = '<p class="msg_from">' + message + '</p>'
                 x.appendChild(newMessage1)
                 messageInput.textContent = "";
@@ -108,6 +112,8 @@
                     questionid +=1;
                     superButton.setAttribute('onclick', 'Dialugue('+questionid+',\'' + messageContent + '\')');
                 }
+                }
+                
                
                 //logChange.setAttribute('onclick', 'ChangeLogin(\'' + login + '\')');
             }
