@@ -93,7 +93,7 @@ namespace WomanSite
                 {
                     var user = await context.Request.ReadFromJsonAsync<User>();
                     var am = app.ApplicationServices.GetService<AuthController>();
-                    var name = user.name;
+                    user.name = user.name.Replace(" ","");
                     var key = user.key;
                     if (am.Login(user)==true)
                     {
