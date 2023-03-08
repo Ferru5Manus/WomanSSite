@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.Identity.Client.Platforms.Features.DesktopOs.Kerberos;
 using System;
 using System.Net;
 using System.Security.Claims;
@@ -94,17 +95,19 @@ namespace WomanSite
                     var user = await context.Request.ReadFromJsonAsync<User>();
                     var am = app.ApplicationServices.GetService<AuthController>();
                     user.name = user.name.Replace(" ","");
+
                     var key = user.key;
                     if (am.Login(user)==true)
                     {
+                        List<Claim> claims = new List<Claim>()
+                        {
+                            new Claim(ClaimsIdentity.DefaultNameClaimType, user.name)
+                        };
+                        // ñîçäàåì îáúåêò ClaimsIdentity
+                        ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
 
-                        var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.name) };
-                        // создаем объект ClaimsIdentity
-                        ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
-                        // установка аутентификационных куки
-                        
-                        await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-                        await context.Response.WriteAsJsonAsync(true);
+                        // äîáàâëÿåì êóêè íàøåìó ïîëüçîâàòåëþ
+                        await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
                     }
                     else
                     {
