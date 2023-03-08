@@ -21,6 +21,7 @@ namespace WomanSite
                 options.MemoryBufferThreshold = int.MaxValue;
             });
             services.AddSingleton<AuthController>();
+            services.AddSingleton<DialogueController>();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => options.LoginPath = "/loginPage");
             services.AddAuthorization();

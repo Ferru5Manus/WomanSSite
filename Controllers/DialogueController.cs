@@ -11,6 +11,7 @@ namespace WomanSite.Controllers
         {
             string s = "";
             string currName = "";
+            С
             using (ApplicationContext db = new ApplicationContext())
             {
                 foreach (var item in db.Questions)
