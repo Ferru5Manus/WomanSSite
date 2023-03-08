@@ -106,7 +106,10 @@ namespace WomanSite
                         await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
                         await context.Response.WriteAsJsonAsync(true);
                     }
-
+                    else
+                    {
+                        await context.Response.WriteAsJsonAsync(false);
+                    }
                 });
                 endpoints.MapGet("/getName", async context => 
                 {

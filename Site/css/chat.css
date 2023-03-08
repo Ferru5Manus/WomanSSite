@@ -82,6 +82,7 @@ body {
   font-size: 61px;
   border: none;
   border-radius: 25px;
+  max-width: 70%;
 }
 
 .input:focus {
