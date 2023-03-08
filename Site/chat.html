@@ -78,7 +78,7 @@
             }
         </script>
         <script>
-            async function Dialugue(questionid, name) {
+            async function Dialugue(int questionid, name) {
                 var x = document.getElementById("chat-container");
                 var messageInput = document.getElementById("name");
                 var message = messageInput.value;
@@ -105,7 +105,8 @@
                     newMessage.innerHTML = '<p class="msg_to">' + thisMessage + '</p>'
                     x.appendChild(newMessage)
                     var superButton = document.getElementById("superButton");
-                    superButton.setAttribute('onclick', 'Dialugue('+questionid+1+',\'' + messageContent + '\')');
+                    questionid +=1;
+                    superButton.setAttribute('onclick', 'Dialugue(int '+questionid+',\'' + messageContent + '\')');
                 }
                
                 //logChange.setAttribute('onclick', 'ChangeLogin(\'' + login + '\')');
