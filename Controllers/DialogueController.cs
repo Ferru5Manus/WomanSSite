@@ -40,9 +40,10 @@ namespace WomanSite.Controllers
         {
             using (ApplicationContext db = new ApplicationContext())
             { 
-                db.Answers.Add(ans);
-                return true;
+                db.Answers.AddRange(ans);
+                db.SaveChanges();
             }
+            return true;
         }
     }
 }
