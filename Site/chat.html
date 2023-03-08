@@ -1,39 +1,113 @@
 <!DOCTYPE html>
-<html>
 <head>
     <meta charset="UTF-8">
     <title>8 Марта</title>
     <link rel="stylesheet" href="css/chat.css" media="all">
     <link rel="stylesheet" href="css/normalize.css" media="all">
-    <link rel="stylesheet" href="css/message.css" media="all">
     <link rel="icon" href="icon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/message.css" media="all">
 </head>
-<body onload="StartMessaging()">>
+<body onload="StartMessaging()">
     <div class="content">
         <p class="title">ЭФБОт</p>
-        <div id="chat-container" class="chat-container"> 
-            
+        <div class="chat-container">
         </div>
         <div class="send">
-            <p><input class="input" id="name"><a class="btn btn-light nowrap icons">Send</a></p>
+            <p><input class="input" id="name"><a id="superButton" class="btn btn-light nowrap icons">Send</a></p>
         </div>
-        <script>
+    </div>
+     <script>
             async function StartMessaging()
             {
-                var response = await fetch("/getFirstMessage", {
+                var x = document.getElementById("chat-container");
+                var response = await fetch("/getName", {
                     method: 'Get',
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 });
                 messageContent = JSON.parse(await response.text())
-                var x = document.getElementById("chat-container");
+                
                 var newMessage = document.createElement("div");
-                newMessage.innerHTML = '<p class="msg">' + messageContent +'</p>'
+                newMessage.innerHTML = '<p class="msg_to">' + "Привет, я суперпупермега бот, созданный твоими одногруппниками для поздравления с 8 марта. Ответь пожалуйста на мои вопросы, чтобы я мог выбрать для тебя прекрасный подарок. Есть одно правило, отвечай на вопрос точно." +'</p>'
                 x.appendChild(newMessage)
+                var superButton = document.getElementById("superButton")
+                if (messageContent = "Арина") {
+                    superButton.setAttribute('onclick', 'Dialugue(2,\'' + messageContent + '\')');
+                    var resp = await fetch("/getMessage", {
+                        method: 'Post',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ personName : messageContent, id : 1})
+                    });
+                    currMessage1 = JSON.parse(await resp.text())
+                    var msg = document.createElement("div");
+                    msg.innerHTML = '<p class="msg_to">' + currMessage1 + '</p>'
+                    x.appendChild(msg)
+                }
+                else if (messageContent = "Даша") {
+                    superButton.setAttribute('onclick', 'Dialugue(14,\'' + messageContent + '\')');
+                    var resp = await fetch("/getMessage", {
+                        method: 'Post',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ personName: messageContent, id: 13 })
+                    });
+                    currMessage1 = JSON.parse(await resp.text())
+                    var msg = document.createElement("div");
+                    msg.innerHTML = '<p class="msg_to">' + currMessage1 + '</p>'
+                    x.appendChild(msg)
+                }
+                else if (messageContent = "Катя") {
+                    superButton.setAttribute('onclick', 'Dialugue(26,\'' + messageContent + '\')');
+                    var resp = await fetch("/getMessage", {
+                        method: 'Post',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ personName: messageContent, id: 25 })
+                    });
+                    currMessage1 = JSON.parse(await resp.text())
+                    var msg = document.createElement("div");
+                    msg.innerHTML = '<p class="msg_to">' + currMessage1 + '</p>'
+                    x.appendChild(msg)
+                }
             }
         </script>
-    </div>
+        <script>
+            async function Dialugue(questionid, name) {
+                var x = document.getElementById("chat-container");
+                var messageInput = document.getElementById("textInput");
+                var message = messageInput.textContent;
+                var newMessage1 = document.createElement("div");
+                newMessage1.innerHTML = '<p class="msg_from">' + message + '</p>'
+                x.appendChild(newMessage1)
+                messageInput.textContent = "";
+                var response = await fetch("/broadcastMessage", {
+                    method: 'Post',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({questionId: questionid, answer: message })
+                });
+                var thisMessage = JSON.parse(await response.text());
+                if(thisMessage=="end"){
+                    var newMessage = document.createElement("div");
+                    newMessage.innerHTML = '<p class="msg_to">' + "Спасибо за ответы, жди подарок. Пока!" + '</p>'
+                    x.appendChild(newMessage)
+                }
+                else{
+                     var newMessage = document.createElement("div");
+                    newMessage.innerHTML = '<p class="msg_to">' + thisMessage + '</p>'
+                    x.appendChild(newMessage)
+                    var superButton = document.getElementById("superButton");
+                    superButton.setAttribute('onclick', 'Dialugue('+questionid+1+',\'' + messageContent + '\')';
+                }
+               
+                //logChange.setAttribute('onclick', 'ChangeLogin(\'' + login + '\')');
+            }
+        </script>
 </body>
-</html>

@@ -107,8 +107,27 @@ namespace WomanSite
                     }
 
                 });
-                endpoints.MapGet("/getFirstMessage", async context => {
-                    await context.Response.WriteAsJsonAsync("ЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫ "+context.User.Identity.Name);
+                endpoints.MapGet("/getName", async context => 
+                {
+                    await context.Response.WriteAsJsonAsync(context.User.Identity.Name);
+                });
+                endpoints.MapPost("/getMessage", async context => 
+                {
+                    var question = await context.Request.ReadFromJsonAsync<Question>();
+                    var dc = app.ApplicationServices.GetService<DialogueController>();
+                    await context.Response.WriteAsJsonAsync(dc.GetMessage(question.id,question.personName));
+                });
+                endpoints.MapPost("/broadcastMessage", async context =>
+                {
+                    var answer = await context.Request.ReadFromJsonAsync<Answer>();
+                    var dc = app.ApplicationServices.GetService<DialogueController>();
+                    var ret = dc.GetMessage(answer.questionId+1, context.User.Identity.Name);
+                    if (ret != "end")
+                    {
+                        var ans1 = new Answer() { questionId = answer.questionId, userLogin = context.User.Identity.Name, answer = answer.answer };
+                        dc.addAnswer(ans1);
+                    }
+                    await context.Response.WriteAsJsonAsync(ret);
                 });
             });
         }

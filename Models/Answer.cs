@@ -6,7 +6,7 @@ namespace WomanSite.Models
     {
         [Key]
         public int id { get; set; }
-        public string questionId { get; set; }
+        public int questionId { get; set; }
         public string userLogin { get; set; }
         public string answer { get; set; }
     }

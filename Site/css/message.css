@@ -4,11 +4,27 @@ body {
   	margin: 0;
 }
 
-.msg {
+.msg_to {
 	font-size: 25px;
 	padding: 10px;
   	border-color: black;
   	border-radius: 20px;
   	background-color: gray;
   	color: white;
+  	max-width: 60%;
+  	display: flex;
+  	margin: 15px;
 }
+
+.msg_from {
+	font-size: 25px;
+	padding: 10px;
+  	border-color: black;
+  	border-radius: 20px;
+  	background-color: lightgrey;
+  	color: white;
+  	float: right;
+  	max-width: 60%;
+  	display: flex;
+  	margin: 15px;
+  	margin-left: 40%;
