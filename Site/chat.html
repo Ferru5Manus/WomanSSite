@@ -86,6 +86,7 @@
                 newMessage1.innerHTML = '<p class="msg_from">' + message + '</p>'
                 x.appendChild(newMessage1)
                 messageInput.textContent = "";
+                messageInput.value ="";
                 var response = await fetch("/broadcastMessage", {
                     method: 'Post',
                     headers: {
